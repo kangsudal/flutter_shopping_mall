@@ -35,7 +35,7 @@ _tab_screen.dart: 검색 탭(screen_search의 상품 검색 화면으로 대체)
 -tab_profile.dart: 로그아웃 기능을 포함하는 마이페이지 화면(마이페이지 내용은 구현하지 않음)
 
 
-##사용할 기술
+## 사용할 기술
 
 1. provider: 상태관리/디자인 패턴
 
