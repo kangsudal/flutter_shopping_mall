@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shopping_mall/screens/screen_index.dart';
+import 'package:flutter_shopping_mall/screens/screen_login.dart';
+import 'package:flutter_shopping_mall/screens/screen_splash.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -14,9 +17,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Shopping mall',
       routes: {
+        '/': (context) => SplashScreen(),
+        '/login': (context) => LoginScreen(),
         '/index': (context) => IndexScreen(),
       },
-      initialRoute: '/index',
+      initialRoute: '/',
     );
   }
 }
