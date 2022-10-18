@@ -34,7 +34,7 @@ class FirebaseAuthProvider with ChangeNotifier {
   }
 
   Future<AuthStatus> loginWithEmail(String email, String password) async {
-    print('#####################$email, $password');
+    // print('#####################$email, $password');
     try {
       await authClient
           .signInWithEmailAndPassword(email: email, password: password)
@@ -53,5 +53,15 @@ class FirebaseAuthProvider with ChangeNotifier {
       print(e);
       return AuthStatus.loginFail;
     }
+  }
+
+  Future<void> logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isLogin', false);
+    prefs.setString('email', '');
+    prefs.setString('password', '');
+    user = null;
+    await authClient.signOut();//FirebaseAuth 객체의 로그아웃 처리, 더이상 authClient로 Firebase 인증 요청을 보낼 수 없게 됨.
+    print('[-] 로그아웃');
   }
 }
