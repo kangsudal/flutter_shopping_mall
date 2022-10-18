@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_shopping_mall/models/model_item_provider.dart';
 import 'package:flutter_shopping_mall/screens/screen_detail.dart';
 import 'package:flutter_shopping_mall/screens/screen_index.dart';
 import 'package:flutter_shopping_mall/screens/screen_login.dart';
@@ -27,7 +28,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: FirebaseAuthProvider()),//FirebaseAuthProvider 클래스를 전역에서 사용하기 위해
+        ChangeNotifierProvider.value(
+            value:
+                FirebaseAuthProvider()), //FirebaseAuthProvider 클래스를 전역에서 사용하기 위해
+        ChangeNotifierProvider.value(value: ItemProvider()),
       ],
       child: MaterialApp(
         title: 'Flutter Shopping mall',
