@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shopping_mall/models/mode_item.dart';
+import 'package:flutter_shopping_mall/models/model_auth.dart';
+import 'package:flutter_shopping_mall/models/model_cart.dart';
+import 'package:provider/provider.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({Key? key}) : super(key: key);
@@ -7,6 +10,10 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final item = ModalRoute.of(context)!.settings.arguments as Item;
+    //Navigator.pushNamed(context, '/detail', arguments: cart.cartItems[index]);로 넘겨받은 매개변수 접근
+    final cart = Provider.of<CartProvider>(context);
+    final authClient =
+        Provider.of<FirebaseAuthProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text(item.title),
@@ -52,21 +59,28 @@ class DetailScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                  InkWell(
-                    onTap: () {}, //장바구니 담기기능
-                    child: Column(
-                      children: [
-                        Icon(
-                          Icons.add,
+                  cart.isItemInCart(item)
+                      ? Icon(
+                          Icons.check,
                           color: Colors.blue,
+                        )
+                      : InkWell(
+                          onTap: () {
+                            cart.addItemToCart(authClient.user, item);
+                          }, //장바구니 담기기능
+                          child: Column(
+                            children: [
+                              Icon(
+                                Icons.add,
+                                color: Colors.blue,
+                              ),
+                              Text(
+                                '담기',
+                                style: TextStyle(color: Colors.blue),
+                              ),
+                            ],
+                          ),
                         ),
-                        Text(
-                          '담기',
-                          style: TextStyle(color: Colors.blue),
-                        ),
-                      ],
-                    ),
-                  ),
                 ],
               ),
             ),
