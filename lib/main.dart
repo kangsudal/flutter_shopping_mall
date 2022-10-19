@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
 import 'models/model_auth.dart';
+import 'models/model_query.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
             value:
                 FirebaseAuthProvider()), //FirebaseAuthProvider 클래스를 전역에서 사용하기 위해
         ChangeNotifierProvider.value(value: ItemProvider()),
+        ChangeNotifierProvider.value(value: SearchQuery()),
       ],
       child: MaterialApp(
         title: 'Flutter Shopping mall',
